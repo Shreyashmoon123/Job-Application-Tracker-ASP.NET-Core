@@ -1,0 +1,42 @@
+﻿@model List<JobTracker.MVC.Models.JobApplication>
+
+<h2>Job Applications</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add Application</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Job Role</th>
+            <th>Application Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.CompanyName</td>
+                <td>@application.JobRole</td>
+                <td>@application.ApplicationDate.ToShortDateString()</td>
+                <td>@application.Status</td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@application.Id"
+                       class="btn btn-warning btn-sm">Edit</a>
+
+                    <form asp-action="Delete"
+                          asp-route-id="@application.Id"
+                          method="post"
+                          style="display:inline">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
